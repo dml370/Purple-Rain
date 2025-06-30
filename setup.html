@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>AI Companion - Welcome</title>
+    
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AI Companion">
+    <link rel="apple-touch-icon" href="/static/icons/apple-icon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/android-icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/icons/android-icon-512.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6hA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        /* This ensures the login page is perfectly centered and clean */
+        html, body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .app-frame {
+            height: auto;
+            max-width: 450px;
+            width: 90%;
+            padding: 50px 30px;
+        }
+
+        .login-container {
+            width: 100%;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .login-container h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .login-container p {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .login-button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .login-button:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .login-button .fa-google {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-frame">
+        <div class="login-container">
+            <h2>AI Companion</h2>
+            <p>Your journey begins here. Please authenticate to create your account and launch the Bootstrap Agent.</p>
+            <button id="login-button" class="login-button">
+                <i class="fab fa-google"></i>
+                <span>Sign In with Google</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.getElementById('login-button');
+            
+            if (loginButton) {
+                loginButton.addEventListener('click', () => {
+                    // This redirects the user to our backend login route,
+                    // which in turn starts the secure Google OAuth 2.0 flow.
+                    window.location.href = '/auth/login';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
