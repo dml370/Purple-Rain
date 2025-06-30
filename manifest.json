@@ -1,0 +1,29 @@
+{
+    "name": "AI Companion",
+    "short_name": "AI Companion",
+    "description": "Your intelligent and ethical AI partner for growth and success.",
+    "start_url": "/main",
+    "display": "standalone",
+    "background_color": "#1a1a1a",
+    "theme_color": "#1a1a1a",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/static/icons/android-icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icons/android-icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icons/apple-icon-180.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
