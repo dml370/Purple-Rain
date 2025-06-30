@@ -1,0 +1,48 @@
+# FILE: docker-compose.yml
+# Final, Unabridged Version: June 29, 2025
+# Use this for LOCAL DEVELOPMENT to simulate the production environment.
+
+version: '3.8'
+
+services:
+  # The main AI Companion application service
+  app:
+    # Builds the Docker image from the Dockerfile in the current directory
+    build: .
+    # Forwards port 8000 on your local machine to port 8000 in the container
+    ports:
+      - "8000:8000"
+    # Mounts the local code directory into the container for live-reloading during development
+    volumes:
+      - .:/app
+      # CRITICAL: Mounts a local directory to persist the ChromaDB vector database
+      - ./chroma_data:/app/data/chroma
+    # Loads all secret variables from your local .env file
+    env_file:
+      - .env
+    # Ensures the database and redis services start before the app does
+    depends_on:
+      - db
+      - redis
+
+  # NOTE: The 'db' service below is for local development ONLY.
+  # In your OCI production environment, the app will connect to your real
+  # Oracle Autonomous Database using the DATABASE_URI from your .env file.
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+
+  # Redis service for caching and background task management with Celery
+  redis:
+    image: redis:7-alpine
+
+# Defines the named volume to ensure Postgres data persists
+volumes:
+  postgres_data:
