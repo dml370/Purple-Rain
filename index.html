@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>AI Companion</title>
+
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AI Companion">
+    <link rel="apple-touch-icon" href="/static/icons/apple-icon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/android-icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/icons/android-icon-512.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6hA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-frame">
+        
+        <header class="app-header">
+            <div class="left-controls">
+                <button id="open-sidebar-btn" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="model-select-container">
+                <select id="model-selector" aria-label="Select AI Model">
+                    <option value="">Loading Models...</option>
+                </select>
+            </div>
+            <div class="right-controls">
+                <button id="open-settings-btn" aria-label="Open Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="ui-panel-container">
+            <div id="mainChatPanel" class="main-chat-panel active">
+                <div class="chat-display-area" id="chat-display-area">
+                    </div>
+                <div class="input-area-wrapper">
+                    <div class="text-input-container">
+                        <textarea id="user-input" placeholder="Begin conversation..." rows="1"></textarea>
+                        <button class="send-button" id="send-message-btn" aria-label="Send message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="bottom-action-bar">
+                        <button class="action-button" id="response-type-btn" aria-label="Response Types"><i class="fas fa-sliders-h"></i></button>
+                        <button class="action-button" id="plus-icon-btn" aria-label="Attachments"><i class="fas fa-plus"></i></button>
+                        <button class="action-button" id="live-video-btn" aria-label="Start Live Video"><i class="fas fa-video"></i></button>
+                        <button class="action-button" id="microphone-btn" aria-label="Start Voice Chat"><i class="fas fa-microphone"></i></button>
+                        <button class="action-button" id="sketch-pad-btn" aria-label="Open Sketch Pad"><i class="fas fa-pen-nib"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="voicePanel" class="voice-panel">
+                <div class="voice-visualization">
+                    <canvas id="audioVisualizationCanvas"></canvas>
+                </div>
+                <div class="voice-controls">
+                    <button class="voice-control-button" id="share-screen-btn" aria-label="Share Screen"><i class="fas fa-desktop"></i></button>
+                    <button class="voice-control-button danger" id="stop-voice-btn" aria-label="Stop Voice Chat"><i class="fas fa-stop"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+            <button class="close-button" id="close-sidebar-btn">&times;</button>
+        </div>
+        <ul>
+            <li><a href="#" id="sidebar-new-chat"><i class="fas fa-plus-circle"></i> New Chat</a></li>
+            <li><a href="#" id="sidebar-chat-history"><i class="fas fa-history"></i> Chat History</a></li>
+            <li><a href="#" id="sidebar-projects"><i class="fas fa-briefcase"></i> Projects</a></li>
+        </ul>
+    </nav>
+
+    <div id="settingsPanel" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Settings</h3>
+            </div>
+    </div>
+
+    <div id="sketchPadModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Sketch Pad</h3>
+            <canvas id="sketchPadCanvas" width="350" height="250"></canvas>
+            <div class="sketch-controls">
+                <button id="clear-sketch-btn"><i class="fas fa-eraser"></i> Clear</button>
+                <button id="send-sketch-btn"><i class="fas fa-paper-plane"></i> Send Sketch</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="plusModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Attach & Record</h3>
+             </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.11/dist/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
