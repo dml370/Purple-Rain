@@ -1,0 +1,345 @@
+/* AI Companion - Premium UI Stylesheet */
+/* Final Version: June 29, 2025 */
+
+/* --- Base Theme & Variables --- */
+:root {
+    --matte-black: #1a1a1a;
+    --matte-black-light: #2c2c2c;
+    --text-color: #f0f0f0;
+    --text-secondary: #a0a0a0;
+    --border-color: #444;
+    --shadow-light: rgba(255, 255, 255, 0.08);
+    --shadow-dark: rgba(0, 0, 0, 0.6);
+    --input-bg: #222;
+    --input-border: #4a4a4a;
+    --accent-color: #007bff;
+    --danger-color: #e74c3c;
+}
+
+/* --- Base & Reset Styles --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #000;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Stainless Steel Frame & Main Layout --- */
+.app-frame {
+    background: linear-gradient(145deg, #232323, #343434);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    box-shadow: 
+        -8px -8px 15px var(--shadow-dark),
+        8px 8px 15px rgba(0,0,0,0.7),
+        inset 1px 1px 2px rgba(255,255,255,0.05),
+        inset -1px -1px 2px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 950px;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    height: 55px;
+    background-color: var(--matte-black);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-dark);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.app-header button {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease;
+}
+.app-header button:hover {
+    color: var(--text-color);
+}
+
+.model-select-container select {
+    background-color: var(--matte-black-light);
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f0f0f0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 30px;
+}
+
+.ui-panel-container {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-chat-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: var(--matte-black);
+}
+
+/* --- Chat Area --- */
+.chat-display-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    word-wrap: break-word;
+    line-height: 1.5;
+    box-shadow: 2px 2px 5px var(--shadow-dark);
+}
+
+.message-user {
+    align-self: flex-end;
+    background-color: var(--accent-color);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message-ai {
+    align-self: flex-start;
+    background-color: var(--matte-black-light);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.message-system, .message-error {
+    align-self: center;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-secondary);
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 0.9em;
+    padding: 5px;
+}
+
+.message-error {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+.thinking-indicator {
+    padding: 12px 15px;
+}
+
+.thinking-indicator span.dot {
+    display: inline-block;
+    background-color: var(--text-secondary);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+.thinking-indicator span.dot:nth-child(1) { animation-delay: -0.32s; }
+.thinking-indicator span.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* --- Input Area --- */
+.input-area-wrapper {
+    flex-shrink: 0;
+    background-color: var(--matte-black);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.text-input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#user-input {
+    flex-grow: 1;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    padding: 12px 15px;
+    color: var(--text-color);
+    resize: none;
+    font-size: 1em;
+    line-height: 1.5;
+    max-height: 120px; /* Limit growth */
+    overflow-y: auto;
+}
+#user-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.send-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    transition: background-color 0.2s ease;
+}
+.send-button:hover {
+    background-color: #0056b3;
+}
+
+.bottom-action-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2em;
+    padding: 8px;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.action-button:hover, .action-button.active {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* --- Voice Panel & Overlays --- */
+.voice-panel, .modal, .sidebar {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: none;
+    z-index: 100;
+}
+
+.voice-panel {
+    background: linear-gradient(180deg, var(--matte-black), #000);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.voice-visualization {
+    width: 80%;
+    height: 200px;
+    margin-bottom: 40px;
+}
+#audioVisualizationCanvas { width: 100%; height: 100%; }
+
+.voice-controls { display: flex; gap: 25px; }
+.voice-control-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px var(--shadow-dark);
+}
+.voice-control-button.danger { background-color: var(--danger-color); }
+
+/* --- Modals --- */
+.modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+.modal.active, .main-chat-panel.active, .voice-panel.active { display: flex; }
+
+.modal-content {
+    background-color: var(--matte-black-light);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px var(--shadow-dark);
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+.close-button {
+    position: absolute;
+    top: 10px; right: 15px;
+    background: none; border: none;
+    color: var(--text-secondary);
+    font-size: 1.8em;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    left: -300px; /* Hidden by default */
+    width: 280px;
+    background-color: var(--matte-black-light);
+    border-right: 1px solid var(--border-color);
+    box-shadow: 5px 0 15px var(--shadow-dark);
+    transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-direction: column;
+    padding: 15px;
+}
+.sidebar.active { left: 0; }
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
+.sidebar ul li a { color: var(--text-color); text-decoration: none; display: block; padding: 12px 10px; border-radius: 8px; }
+.sidebar ul li a:hover { background-color: var(--input-bg); }
+.sidebar ul li a i { margin-right: 10px; width: 20px; text-align: center; }
